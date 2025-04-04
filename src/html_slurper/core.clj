@@ -140,3 +140,32 @@
       )
     )
   )
+
+;;11
+(defn encode-modified [list]
+  (loop [
+         cur-letter (first list)
+         old-list (rest list)
+         count 1
+         new-list '()
+         ]
+    (cond
+      (empty? old-list) (concat
+                         new-list
+                         (if (> count 1)
+                                (cons (cons count (cons cur-letter nil)) nil )
+                                (cons cur-letter nil)
+                                )
+                                )
+      (not= cur-letter (first old-list)) (recur (first old-list) (rest old-list) 1 (concat
+                                                                                    new-list
+                                                                                    (if (> count 1)
+                                (cons (cons count (cons cur-letter nil)) nil )
+                                (cons cur-letter nil)
+                                )
+                                                                                    )
+                                                )
+      :else (recur cur-letter (rest old-list) (inc count) new-list)
+      )
+    )
+  )
