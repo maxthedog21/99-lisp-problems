@@ -169,3 +169,22 @@
       )
     )
   )
+
+
+;;12
+(defn decode [list]
+  (loop [
+         cur-item (first list)
+         old-list (rest list)
+         new-list '()
+         ]
+    (cond
+      (nil? cur-item) new-list
+      (seq? cur-item) (do
+                         (recur (first old-list) (rest old-list)  (concat new-list (map (fn [x] (-> cur-item rest first)) (take (first cur-item) (range))))
+                                  )
+                           )
+      :else (recur (first old-list) (rest old-list) (concat  new-list (cons cur-item nil)))
+      )
+    )
+  )
