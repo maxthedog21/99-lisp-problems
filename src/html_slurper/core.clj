@@ -214,3 +214,13 @@
     )
   )
 
+
+;;14
+(defn duplicate [list]
+  (loop [cur-list list new-list '()]
+    (cond
+      (empty? cur-list) new-list
+      :else (let [cur-item (first cur-list) rest-list (rest cur-list)] (recur rest-list (concat new-list (cons cur-item (cons cur-item nil)) ) ))
+      )
+    )
+  )
