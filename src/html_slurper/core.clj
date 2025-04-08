@@ -188,3 +188,29 @@
       )
     )
   )
+
+;;13
+(defn encode-direct [list]
+  (encode-direct-helper (rest list) (first list) 1)
+  )
+
+(defn encode-direct-helper [cur-list cur-letter count]
+  (let [cur-item (first cur-list) rList (rest cur-list)]
+    (println cur-list)
+    (cond
+      (empty? cur-list)                                   (if (< count 2)
+                                  (cons cur-letter nil)
+                                  (cons (cons count (cons cur-letter nil)) nil)
+                                    )
+      (not= cur-item cur-letter) (concat
+                                  (if (< count 2)
+                                  (cons cur-letter nil)
+                                  (cons (cons count (cons cur-letter nil)) nil)
+                                    )
+
+                                  (encode-direct-helper rList cur-item 1))
+      :else (encode-direct-helper rList cur-letter (+ count 1))
+      )
+    )
+  )
+
