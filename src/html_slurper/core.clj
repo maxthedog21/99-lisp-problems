@@ -224,3 +224,13 @@
       )
     )
   )
+
+;;15
+(defn repli [list num]
+  (loop [cur-list list new-list '()]
+    (cond
+      (empty? cur-list) new-list
+      :else (let [cur-item (first cur-list) rest-list (rest cur-list)] (recur rest-list (concat new-list (map (fn [n] cur-item) (take num (range))) )))
+      )
+    )
+  )
