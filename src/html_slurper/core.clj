@@ -234,3 +234,15 @@
       )
     )
   )
+
+
+;;16
+(defn drop [list n]
+  (loop [cur-list list new-list '() number (- n 1)]
+    (cond
+      (empty? cur-list)  new-list
+      (= number 0) (recur (rest cur-list) new-list (- number 1))
+      :else (recur (rest cur-list) (concat new-list (cons (first cur-list) nil)) (- number 1))
+      )
+    )
+  )
