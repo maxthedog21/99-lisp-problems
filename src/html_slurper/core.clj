@@ -246,3 +246,16 @@
       )
     )
   )
+(cons '() '())
+(concat (cons '() '()) (cons '() '()))
+(or true false)
+
+;;17
+(defn split [list n]
+  (loop [cur-list list split-list '() number n]
+    (cond
+      (or (empty? cur-list) (= number 0))  (concat (cons split-list nil) (cons cur-list nil) )
+      :else (recur (rest cur-list) (concat split-list (cons (first cur-list) nil)) (- number 1))
+      )
+    )
+  )
