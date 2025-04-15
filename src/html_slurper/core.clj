@@ -246,9 +246,6 @@
       )
     )
   )
-(cons '() '())
-(concat (cons '() '()) (cons '() '()))
-(or true false)
 
 ;;17
 (defn split [list n]
@@ -256,6 +253,17 @@
     (cond
       (or (empty? cur-list) (= number 0))  (concat (cons split-list nil) (cons cur-list nil) )
       :else (recur (rest cur-list) (concat split-list (cons (first cur-list) nil)) (- number 1))
+      )
+    )
+  )
+
+;;18
+(defn slice [list gauche droit]
+  (loop [cur-list list new-liste '() temp-gauche 1 temp-droit gauche]
+    (cond
+      (or (empty? cur-list) (> temp-droit droit)) new-liste
+      (< temp-gauche gauche) (recur (rest cur-list) new-liste (inc temp-gauche) temp-droit)
+      (<= temp-droit droit) (recur (rest cur-list) (concat new-liste (cons (first cur-list) nil)) temp-gauche (inc temp-droit))
       )
     )
   )
