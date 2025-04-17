@@ -267,3 +267,17 @@
       )
     )
   )
+
+
+;;dix-nuef
+(defn tourne [list num]
+    (let [cut-off-nombre (if (neg? num)(- (count list) (* -1 num)) num)]
+      (loop [cur-liste list new-list '() nombre 0]
+      (cond
+        (empty? cur-liste) new-list
+        (< nombre cut-off-nombre) (recur (rest cur-liste) (concat new-list (cons (first cur-liste) nil)) (inc nombre))
+        :else (concat cur-liste new-list)
+        )
+      )
+      )
+  )
