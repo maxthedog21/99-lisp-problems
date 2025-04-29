@@ -281,3 +281,15 @@
       )
       )
   )
+
+;;vingt
+(defn retirer-a [liste num]
+  (loop [new-liste '() cur-liste liste count (dec num)]
+    (let [cur-item (first cur-liste) rest-liste (rest cur-liste)]
+      (cond
+        (<= count 0) (concat new-liste rest-liste)
+        :else (recur (concat new-liste (cons cur-item nil)) rest-liste (dec count))
+        )
+      )
+    )
+)
